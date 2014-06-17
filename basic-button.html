@@ -1,9 +1,27 @@
-<!--
-A button with a simple generic style.
--->
-
 <link rel="import" href="../basic-element/basic-element.html">
 
+<!--
+@group Basic Web Components
+
+A button with a tasteful, minimalist generic style.
+
+<b>Usage:</b>
+
+  <basic-button
+    isdisabled="[true|false]"
+    quiet="[true|false]">
+    <ANY></ANY>
+  </basic-button>
+
+<b>Example:</b>
+
+  <basic-button isdisabled="true">Disabled</basic-button>
+
+@element basic-button
+@extends basic-element
+@status stable
+@homepage basic-web-components.github.io/basic-element/components/basic-button
+-->
 <polymer-element name="basic-button" extends="basic-element">
 
 <template>
@@ -130,12 +148,28 @@ Polymer( "basic-button", {
 
 
   publish: {
+    /**
+     * Disables `basic-button` if set to `true`. It's value is going to be
+     * reflected back into the matching attribute when it changes.
+     *
+     * @attribute isdisabled
+     * @type boolean
+     * default false
+     */
     // We would *really* like to call this attribute "disabled", but that causes
     // problems in IE. See https://github.com/Polymer/polymer/issues/372.
     isdisabled: {
       value: false,
       reflect: true
     },
+    /**
+     * Makes `basic-button` "quite" by removing `background`, `border` and
+     * `box-shadow` properties.
+     *
+     * @attribute quiet
+     * @type boolean
+     * @default false
+     */
     quiet: {
       value: false,
       reflect: true
