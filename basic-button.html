@@ -43,9 +43,6 @@ button[isdisabled] {
 /*
  * Generic styling
  */
-polyfill-next-selector {
-  content: ':host[generic=""] button';
-}
 :host([generic=""])::shadow button {
   background: whitesmoke;
   background-image: -webkit-linear-gradient(top, white, #e6e6e6);
@@ -62,10 +59,7 @@ polyfill-next-selector {
   vertical-align: middle;
 }
 
-polyfill-next-selector {
-  content: ':host([quiet]) button';
-}
-:host([generic=""][quiet])::shadow button {
+:host([generic=""].quiet)::shadow button {
   /* Opt-out of border, etc., in normal state. */
   background: none;
   background-color: transparent;
@@ -73,9 +67,6 @@ polyfill-next-selector {
   box-shadow: none;
 }
 
-polyfill-next-selector {
-  content: ':host([generic=""]) button:hover';
-}
 :host([generic=""])::shadow button:hover {
   background-color: #e6e6e6;
   background-image: -webkit-linear-gradient(top, white, #eee);
@@ -88,9 +79,6 @@ polyfill-next-selector {
   text-shadow: 0 1px 3px white;
 }
 
-polyfill-next-selector {
-  content: ':host([generic=""]) button:active';
-}
 :host([generic=""])::shadow button:active {
   background-color: #d9d9d9;
   background-image: none;
@@ -98,17 +86,11 @@ polyfill-next-selector {
   color: #111;
 }
 
-polyfill-next-selector {
-  content: ':host([generic=""]) button:active, :host([generic=""]) button:focus';
-}
 :host([generic=""])::shadow button:active,
 :host([generic=""])::shadow button:focus {
   border-color: #4d90fe;
 }
 
-polyfill-next-selector {
-  content: ':host([generic=""][isDisabled]) button';
-}
 :host([generic=""][isdisabled])::shadow button {
   background-color: whitesmoke;
   background-image: none;
@@ -119,7 +101,7 @@ polyfill-next-selector {
 }
 </style>
 
-<button id="button" disabled="{{isdisabled}}" tabindex="{{tabindex}}">
+<button disabled?="{{isdisabled}}" tabindex="{{tabindex}}">
   <content></content>
 </button>
 
@@ -128,29 +110,13 @@ polyfill-next-selector {
 <script>
 Polymer( "basic-button", {
 
-
   publish: {
     // We would *really* like to call this attribute "disabled", but that causes
     // problems in IE. See https://github.com/Polymer/polymer/issues/372.
     isdisabled: {
       value: false,
       reflect: true
-    },
-    quiet: {
-      value: false,
-      reflect: true
-    },
-    quiet: {
-      value: null,
-      reflect: true
     }
-  },
-
-  // TODO: Remove this attribute and just rely on class once Blink styling
-  // bug is fixed (see note above in styles).
-  quietChanged: function() {
-    var quiet = ( String( this.quiet ) === "true" );
-    this.$.button.classList.toggle( "quiet", quiet );
   }
 
 });
